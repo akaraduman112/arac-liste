@@ -1,445 +1,158 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ankara İtfaiyesi Araç Kılavuzu</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sayfa Taşındı</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <meta name="description" content="Bu internet sayfası taşınmıştır.">
   <style>
-    /* (Stil kodları aynı, yukarıdaki gibi) */
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #fff;
-      margin: 0; padding: 0 1rem 2rem 1rem;
-      color: #333;
+    :root{
+      --bg1: #0f172a;
+      --bg2: #06202a;
+      --card: rgba(255,255,255,0.04);
+      --accent: linear-gradient(90deg,#6ee7b7,#3b82f6,#8b5cf6);
     }
-    .vehicle-card.gizle {
-  display: none !important;
-}
-
-    header {
-      display: flex; align-items: center; justify-content: space-between;
-      background: #fafafa;
-      border-bottom: 3px solid #b30000;
-      padding: 15px 10px;
-      box-shadow: 0 4px 8px rgba(179,0,0,0.15);
-      border-radius: 0 0 10px 10px;
-      user-select: none;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      background: radial-gradient(1200px 600px at 10% 20%, rgba(59,130,246,0.08), transparent),
+                  radial-gradient(900px 400px at 90% 80%, rgba(139,92,246,0.06), transparent),
+                  linear-gradient(180deg,var(--bg1),var(--bg2));
+      color:#e6eef8;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px;
     }
-    .logo-left img, .logo-right img {
-      height: 80px;
-      max-width: 140px;
-      object-fit: contain;
-      border-radius: 10px;
-      background: #fff;
-      padding: 5px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
+    .card{
+      width:100%;
+      max-width:880px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.06);
+      box-shadow:0 10px 40px rgba(2,6,23,0.6);
+      border-radius:18px;
+      padding:48px;
+      display:grid;
+      grid-template-columns:1fr 340px;
+      gap:28px;
+      align-items:center;
+      backdrop-filter: blur(6px);
     }
-    .logo-left img:hover, .logo-right img:hover {
-      transform: scale(1.05);
+    .left{
+      padding-right:10px;
     }
-    h1 {
-      margin: 0;
-      flex-grow: 1;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #b30000;
-      text-align: center;
-      letter-spacing: 1.2px;
-      text-shadow: 1px 1px 2px rgba(179, 0, 0, 0.4);
-      min-width: 220px;
+    h1{
+      margin:0 0 10px 0;
+      font-size:clamp(28px,4vw,44px);
+      line-height:1.02;
+      letter-spacing:-0.02em;
+      font-weight:800;
+      background:linear-gradient(90deg,#fff,#dbeafe 60%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
     }
-    main {
-      max-width: 900px;
-      margin: 2.5rem auto 0 auto;
+    p.lead{
+      margin:0 0 18px 0;
+      color:rgba(230,238,248,0.9);
+      font-size:16px;
     }
-    .category {
-      margin-bottom: 1.8rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-      background: #fff;
-      user-select: none;
-      overflow: hidden;
+    .note{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.02);
+      color:rgba(255,255,255,0.7);
+      font-weight:600;
+      font-size:13px;
+      border:1px solid rgba(255,255,255,0.03);
     }
-    .category > h2 {
-      margin: 0;
-      padding: 15px 20px;
-      font-size: 1.5rem;
-      color: #b30000;
-      border-bottom: 2px solid #b30000;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      user-select: none;
-      transition: background-color 0.3s ease;
+    .right{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:16px;
     }
-    .category > h2:hover {
-      background-color: #fdecea;
+    .btn{
+      appearance:none;
+      border:0;
+      padding:16px 22px;
+      font-size:16px;
+      font-weight:700;
+      border-radius:12px;
+      cursor:pointer;
+      background-image:var(--accent);
+      background-size:200% 100%;
+      color:#04204b;
+      box-shadow:0 8px 20px rgba(59,130,246,0.14), inset 0 -2px 0 rgba(255,255,255,0.06);
+      transition:transform .18s ease, background-position .45s ease, box-shadow .18s ease;
     }
-    .category > h2::after {
-      content: '+';
-      font-weight: 700;
-      font-size: 1.6rem;
-      color: #b30000;
-      user-select: none;
-      transition: transform 0.3s ease;
+    .btn:hover{transform:translateY(-3px);background-position:100% 0}
+    .btn:active{transform:translateY(-1px)}
+    .btn:focus{outline:3px solid rgba(99,102,241,0.18);outline-offset:4px}
+    .small{
+      font-size:13px;
+      color:rgba(230,238,248,0.7);
+      text-align:center;
     }
-    .category.open > h2::after {
-      content: '−';
-      color: #800000;
+    .subtlelink{color:rgba(230,238,248,0.7);text-decoration:none;border-bottom:1px dashed rgba(255,255,255,0.03);padding-bottom:3px}
+    /* responsive */
+    @media (max-width:880px){
+      .card{grid-template-columns:1fr; padding:32px}
+      .right{flex-direction:row;justify-content:space-between}
     }
-    .vehicles-container {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.5s ease;
-      padding: 0 20px;
-      background: #fff7f7;
-      border-radius: 0 0 10px 10px;
-      display: grid;
-      grid-template-columns: repeat(auto-fill,minmax(180px,1fr));
-      gap: 1rem;
-      justify-items: center;
+    @media (max-width:420px){
+      body{padding:20px}
+      .card{padding:22px}
+      .btn{padding:12px 16px}
     }
-    .category.open .vehicles-container {
-      max-height: none;
-      padding-top: 20px;
-      padding-bottom: 20px;
-      overflow-y: auto;
-    }
-    .vehicle-card {
-      border: 2px solid #b30000;
-      border-radius: 10px;
-      padding: 10px;
-      max-width: 180px;
-      background: #fff;
-      box-shadow: 0 2px 8px rgba(179, 0, 0, 0.15);
-      text-align: center;
-      user-select: none;
-      cursor: pointer;
-      transition: box-shadow 0.3s ease;
-      position: relative;
-    }
-    .vehicle-card:hover {
-      box-shadow: 0 4px 15px rgba(179, 0, 0, 0.4);
-    }
-    .vehicle-card img {
-      width: 100%;
-      height: 120px;
-      object-fit: contain;
-      border-radius: 8px;
-      margin-bottom: 8px;
-      user-select: none;
-    }
-    .vehicle-card .name {
-      font-weight: 700;
-      font-size: 1rem;
-      color: #b30000;
-      margin-bottom: 6px;
-    }
-    .sub-list a {
-  display: inline-block;
-  background-color: #b30000;
-  color: #fff;
-  padding: 8px 12px;
-  border-radius: 8px;
-  margin: 4px 4px 4px 0;
-  font-weight: 600;
-  font-size: 0.9rem;
-  text-decoration: none;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.sub-list a:hover {
-  background-color: #800000;
-  transform: translateY(-2px);
-}
-
-    .vehicle-card .links a:hover {
-      color: #800000;
-      text-decoration: underline;
-    }
-    .sub-list {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-      margin-top: 8px;
-      text-align: left;
-    }
-    .vehicle-card.open .sub-list {
-      max-height: 500px; /* Yeterince büyük */
-    }
-    @media (max-width: 700px) {
-      header {
-        padding: 10px;
-      }
-      .logo-left img, .logo-right img {
-        height: 60px;
-        max-width: 80px;
-      }
-      h1 {
-        font-size: 1.1rem;
-        min-width: auto;
-        padding: 0 5px;
-        text-shadow: none;
-      }
-      .vehicles-container {
-        grid-template-columns: repeat(auto-fill,minmax(140px,1fr));
-      }
-    }
+    /* subtle floating dots */
+    .dots{position:absolute;inset:auto auto 18px 18px;opacity:0.06}
+    .footer{margin-top:8px;color:rgba(230,238,248,0.45);font-size:13px}
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo-left">
-      <img src="https://s.ankara.bel.tr/files/2022/11/24/6e7ea7997a234e3b8089fd0779c5e1e6.jpeg" alt="Ankara Belediyesi Logosu" />
-    </div>
-    <h1>ANKARA İTFAİYESİ ARAÇ KILAVUZU</h1>
-    <div class="logo-right">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Emblem_of_Turkish_Firefighters.svg/640px-Emblem_of_Turkish_Firefighters.svg.png" alt="İtfaiye Logosu" />
-    </div>
-  </header>
-
-  <main>
-    <div class="category" id="merdiven">
-      <h2>Merdiven</h2>
-      <div class="vehicles-container">
-        <div class="vehicle-card">
-          <img src="https://i.imgur.com/H77ZQzg.jpeg" alt="MAGİRUS 42M" />
-          <div class="name">MAGİRUS 42M</div>
-          <div class="sub-list">
-          <a href="https://akaraduman112.github.io/magirus/" target="_blank" rel="noopener noreferrer">Kolay Kılavuz</a>
-          </div>
-        </div>
-        <div class="vehicle-card">
-          <img src="https://i.imgur.com/qsyEQon.jpeg" alt="BRONTO 32M" />
-          <div class="name">BRONTO 32M</div>
-          <div class="sub-list">
-            <a href="https://drive.google.com/file/d/1FlY0ABxt7t9IL0snN3d1_jwKDXlXvYNZ/view?usp=sharing" target="_blank" rel="noopener noreferrer">Basit Kitapçık</a>
-            <a href="https://drive.google.com/file/d/1-bgC9p995AAqtYqBPpZI33rX1SWjubn5/view?usp=sharing" target="_blank" rel="noopener noreferrer">Güvenlik Talimatları</a>
-            <a href="https://drive.google.com/file/d/1ndPf4AU55gofQjf-HwKUIVNWTQbHwhBD/view?usp=sharing" target="_blank" rel="noopener noreferrer">Detaylı Kullanım Kılavuzu</a>
-          </div>
-        </div>
-        <div class="vehicle-card">
-          <img src="https://www.umtas.com.tr/wp-content/uploads/2023/06/Mafsalli-Merdivenli-Itfaiye-Araclari-2.jpg" alt="ROSENBAUER 42M" />
-          <div class="name">ROSENBAUER 42M</div>
-          <div class="sub-list">
-            <a href="https://drive.google.com/file/d/1-84vBnCP8v4GtXCPyZyO_2QunNmLJcKm/view?usp=sharing" target="_blank" rel="noopener noreferrer">Kullanım Kılavuzu (PDF)</a>
-          </div>
-        </div>
-        <div class="vehicle-card">
-          <img src="https://volkan.com.tr/wp-content/uploads/2020/04/merdivenli-araclar.jpg" alt="VOLKAN 42M" />
-          <div class="name">VOLKAN 42M</div>
-          <div class="sub-list">
-            <a href="https://drive.google.com/file/d/1VtG70rthA7RXSNrU3J0ETogcfUJJhFHB/view?usp=sharing" target="_blank" rel="noopener noreferrer">Basit Kılavuz</a>
-            <a href="https://drive.google.com/file/d/1NXIfzSZWobqoSOqXssSEiGj1LLXyEGFO/view?usp=sharing" target="_blank" rel="noopener noreferrer">Kullanım Kılavuzu (PDF)</a>
-          </div>
-        </div>
-        <div class="vehicle-card">
-          <img src="https://i.imgur.com/uBonWQy.jpeg" alt="KARBA 32M" />
-          <div class="name">KARBA 32M</div>
-          <div class="sub-list">
-            <a href="https://drive.google.com/file/d/1a-NUktF0WI6zsHSDVEoN170EuSH9K9u7/view?usp=sharing">Kullanım Kılavuzu (PDF)</a>
-          </div>
-        </div>
-        <div class="vehicle-card gizle">
-          <img src="https://i.imgur.com/MxjigUF.png" alt="METZ 39M" />
-          <div class="name">METZ 39M</div>
-          <div class="sub-list">
-          </div>
-        </div>
-      </div>
+  <div class="card" role="region" aria-label="Taşınmış sayfa bildirimi">
+    <div class="left">
+      <span class="note">Dikkat</span>
+      <h1>Bu internet sayfası taşınmıştır</h1>
+      <p class="lead">Aradığınız içerik artık yeni bir adrese taşındı. Aşağıdaki düğmeye tıklayarak yeni sayfaya hızlıca geçiş yapabilirsiniz.</p>
+      <p class="footer">Eğer otomatik yönlendirme işe yaramazsa, lütfen düğmeyi kullanarak yeni sayfayı ziyaret edin.</p>
     </div>
 
-    <div class="category" id="arazoz">
-      <h2>Arazöz</h2>
-      <div class="vehicles-container">
-        <div class="vehicle-card">
-          <img src="https://i.imgur.com/K7tVQWk.jpeg" alt="1629 MERCEDES ZIEGLER" />
-          <div class="name">1629 MERCEDES ZIEGLER</div>
-          <div class="sub-list">
-            <a href="https://drive.google.com/file/d/1xebfMIMh6R8b3iw3X3bS8YQj3LHM1TO-/preview" target="_blank" rel="noopener noreferrer">Kullanım Kılavuzu (PDF)</a>
-            <a href="https://drive.google.com/file/d/15KdEq6pL5Og_BoWFQOQOjPyhspsO2yPe/view?usp=sharing" target="_blank" rel="noopener noreferrer">Kuru Kimyevi Toz Tankı Kullanımı</a>
-          </div>
-        </div>
-        <div class="vehicle-card">
-          <img src="https://i.imgur.com/t5mpoof.jpeg" alt="İVECO ÇELİKSAN" />
-          <div class="name">İVECO ÇELİKSAN</div>
-          <div class="sub-list">
-            <a href="https://akaraduman112.github.io/celiksan-ariza-son/" target="_blank" rel="noopener noreferrer">Acil Durum Yönlendirmesi</a>
-            <a href="https://akaraduman112.github.io/celiksan-kullanim-son/" target="_blank" rel="noopener noreferrer">Su Pompası Kullanımı</a>
-          </div>
-        </div>
-        <div class="vehicle-card">
-          <img src="https://i.imgur.com/klbdjOL.jpeg" alt="12 TONLUK 2023 ROSENBAUER MERCEDES" />
-          <div class="name">12 TONLUK 2023 ROSENBAUER MERCEDES</div>
-          <div class="sub-list">
-            <a href="https://akaraduman112.github.io/12-TON-ROSENBAUER/" target="_blank" rel="noopener noreferrer">Su Pompası Kullanımı</a>
-          </div>
-        </div>
-                <div class="vehicle-card">
-          <img src="https://i.imgur.com/fTnKSZm.jpeg" alt="12 TONLUK 2025 ROSENBAUER MERCEDES" />
-          <div class="name">12 TONLUK 2025 ROSENBAUER MERCEDES</div>
-          <div class="sub-list">
-            <a href="https://drive.google.com/file/d/1K6TKyUlx9TAwOTJqGmJbbqrKUD_sri9N/view?usp=sharing" target="_blank" rel="noopener noreferrer">Kullanım Kılavuzu (PDF)</a>
-          </div>
-        </div>
-        <div class="vehicle-card gizle">
-          <img src="https://i.imgur.com/VqVfqS3.jpeg" alt="MAN TANKER" />
-          <div class="name">MAN TANKER</div>
-          </div>
-        <div class="vehicle-card gizle">
-          <img src="https://i.imgur.com/4hGPvEy.png" alt="15 TON MERCEDES TANKER" />
-          <div class="name">15 TON MERCEDES TANKER</div>
-          </div>
-        <div class="vehicle-card gizle">
-          <img src="https://i.imgur.com/JVlSItp.png" alt="1517 MERCEDES ROSENBAUER" />
-          <div class="name">1517 MERCEDES ROSENBAUER</div>
-          </div>
-        <div class="vehicle-card gizle">
-          <img src="https://i.imgur.com/rvbXdJK.jpeg" alt="FORD TANKER" />
-          <div class="name">FORD TANKER</div>
-          </div>
-        <div class="vehicle-card gizle">
-          <img src="https://i.imgur.com/8KcfqEQ.jpeg" alt="DAR ALAN ARACI ROSENBAUER" />
-          <div class="name">DAR ALAN ARACI ROSENBAUER</div>
-          </div>
-        <div class="vehicle-card gizle">
-          <img src="https://i.imgur.com/4ynkApp.jpeg" alt="TEK KABİN İVECO 5 TON ROSENBAUER" />
-          <div class="name">TEK KABİN İVECO 5 TON ROSENBAUER</div>
-          </div>
-        <div class="vehicle-card">
-          <img src="https://i.imgur.com/LzHG1qb.jpeg" alt="KARBA MAN 6 TON ARAZÖZ" />
-          <div class="name">KARBA MAN 6 TON ARAZÖZ</div>
-          <div class="sub-list">
-            <a href="https://drive.google.com/file/d/15xNrWStk7duCynVWX-4txb_8CIcYhhzF/view?usp=sharing">Kullanım Kılavuzu (PDF)</a>
-          </div>
-        </div>
-        <div class="vehicle-card">
-          <img src="https://i.imgur.com/Qj1nkK2.jpeg" alt="KARBA MAN 10 TON ARAZÖZ" />
-          <div class="name">KARBA MAN 10 TON ARAZÖZ</div>
-          <div class="sub-list">
-            <a href="https://drive.google.com/file/d/1LEtRXPcNCY7Wr5hBe5Z-HHvi37y5IvPD/view?usp=sharing">Kullanım Kılavuzu (PDF)</a>
-          </div>
-        </div>
-        <div class="vehicle-card">
-          <img src="https://i.imgur.com/Wi0BCPM.jpeg" alt="UNİMOG" />
-          <div class="name">UNİMOG</div>
-          <div class="sub-list">
-            <a href="https://drive.google.com/file/d/1WyCPJ92Qb1eMOdcEO8-SG1J03b6dwM9a/preview">Kullanım Kılavuzu (PDF)</a>
-          </div>
-        </div>
-        <div class="vehicle-card">
-          <img src="https://i.imgur.com/6cXNy5t.jpeg" alt="ROT FİRE" />
-          <div class="name">ROT FİRE</div>
-          <div class="sub-list">
-            <a href="https://drive.google.com/file/d/1RkW6-dMdpap9e5r51HQK1FjZdQANopCC/view?usp=sharing">Kullanım Kılavuzu (PDF)</a>
-          </div>
-        </div>
-      </div>
-    </div>
-      
-    <div class="category" id="kopuk">
-      <h2>Köpük Kulesi</h2>
-      <div class="vehicles-container">
-        <div class="vehicle-card gizle">
-          <img src="https://www.haberinnabzi.com/d/other/2023/04/06/jusgqz2jfxr8yw5odacd6ytm.jpg" alt="SİNCAN OSB KARBA 32M" />
-          <div class="name">SİNCAN OSB KARBA 32M</div>
-        </div>
-        <div class="vehicle-card">
-          <img src="https://i.ytimg.com/vi/HnMfqVvDo30/maxresdefault.jpg" alt="ASO KARBA" />
-          <div class="name">ASO KARBA</div>
-          <div class="sub-list">
-            <a href="https://drive.google.com/file/d/1-2KZMRrih0tws_uXXfIJesaqK8PnuyNF/view?usp=sharing" target="_blank" rel="noopener noreferrer">Kullanım Kılavuzu</a>
-          </div>
-        </div>
-        <div class="vehicle-card">
-          <img src="https://lh3.googleusercontent.com/pw/AP1GczNX3zV6Y6h_N8x-xvsBINGCtTpFDtesddo3MCn3GFH1YyBOXFuKAc3pOSS1DnlJOG6b8EntLSv7hkw4KIMqp2TNjVZg11yKeID8T2ridmQDxzNQVhJARllFI7EXTuqZyOxVMJ7v0mPIp0J9y7m6qJWMsA=w1225-h919-s-no-gm?authuser=0" alt="MERKEZ BRONTO 35MA" />
-          <div class="name">MERKEZ BRONTO 35M</div>
-          <div class="sub-list">
-            <a href="https://drive.google.com/file/d/1Nvd5rHVFpt6onTBnHXrrn9_TU_uc3lGP/view?usp=sharing" target="_blank" rel="noopener noreferrer">Kullanım Kılavuzu</a>
-            <a href="https://drive.google.com/file/d/1fMziOn34WEHYzJe4LSmH2P80WE461wpq/view?usp=sharing" target="_blank" rel="noopener noreferrer">Güvenlik Talimatları</a>
-          </div>
-        </div>
-        <div class="vehicle-card gizle">
-          <img src="https://i.imgur.com/Ta9AScj.jpeg" alt="MERKEZ ESKİ KÖPÜK KULESİ" />
-          <div class="name">MERKEZ ESKİ KÖPÜK KULESİ</div>
-        </div>
-      </div>
+    <div class="right">
+      <button id="go" class="btn" aria-label="Yeni sayfaya git">Yeni Sayfa</button>
+      <div class="small">Hedef: <a class="subtlelink" href="https://itfaiye.github.io/liste/" target="_blank" rel="noopener">itfaiye.github.io/liste/</a></div>
     </div>
 
-    <div class="category" id="snorkel">
-      <h2>Şnorkel</h2>
-      <div class="vehicles-container">
-        <div class="vehicle-card">
-          <img src="https://i.imgur.com/I7LEHbW.jpeg" alt="BRONTO 90M" />
-          <div class="name">BRONTO 90M</div>
-          <div class="sub-list">
-          <a href="https://drive.google.com/file/d/1TFtG2bOQTGlRzIIaz5Refa_xyTl3kzGr/view?usp=sharing" rel="noopener noreferrer">Basit Kullanım Kılavuzu</a>
-          <a href="https://drive.google.com/file/d/1-nTZ-Mlf3mXtbjvqJjhIsSooj9x0xwsC/view?usp=sharing" target="_blank" rel="noopener noreferrer">Kullanım Kılavuzu (Çevirilmiş)</a>
-          </div>
-        </div>
-        <div class="vehicle-card">
-          <img src="https://i.imgur.com/caG6lm7.png" alt="BRONTO 54M" />
-          <div class="name">BRONTO 54M</div>
-          <div class="sub-list">
-            <a href="https://drive.google.com/file/d/1I6ZAyCZa1CENi54XIq6LFrDIPfTmuXYY/view?usp=sharing" target="_blank" rel="noopener noreferrer">Kullanım Kılavuzu (Çevirilmiş)</a>
-         </div>
-        </div>
-        <div class="vehicle-card gizle">
-          <img src="https://i.imgur.com/lwU6qBP.jpeg" alt="KARBA 21M PLATFORM" />
-          <div class="name">KARBA 21M PLATFORM</div>
-        </div>
-      </div>
-    </div>
-  </main>
+    <svg class="dots" width="160" height="80" viewBox="0 0 160 80" fill="none" aria-hidden>
+      <circle cx="12" cy="12" r="4" fill="white" opacity="0.06"></circle>
+      <circle cx="36" cy="24" r="3" fill="white" opacity="0.06"></circle>
+      <circle cx="68" cy="8" r="2" fill="white" opacity="0.06"></circle>
+      <circle cx="120" cy="36" r="3" fill="white" opacity="0.06"></circle>
+    </svg>
+  </div>
 
   <script>
-    // Kategori başlıklarına tıklanınca aç/kapa
-    document.querySelectorAll('.category > h2').forEach(h2 => {
-      h2.addEventListener('click', () => {
-        const category = h2.parentElement;
-        category.classList.toggle('open');
-      });
+    const url = 'https://itfaiye.github.io/liste/';
+    const btn = document.getElementById('go');
+    btn.addEventListener('click', () => {
+      // open in new tab for safety
+      window.open(url, '_blank', 'noopener');
     });
 
-    // Araç kartlarına tıklanınca varsa alt başlık aç/kapa
-    document.querySelectorAll('.vehicle-card').forEach(card => {
-      card.addEventListener('click', (e) => {
-        // Linklere tıklanırsa alt açma kapama yapma
-        if (e.target.tagName === 'A') return;
-        const subList = card.querySelector('.sub-list');
-        if (!subList) return;
-        card.classList.toggle('open');
-      });
-    });
+    // make Enter key trigger button when focused
+    btn.addEventListener('keyup', (e) => { if(e.key === 'Enter') btn.click(); });
+
+    // optional gentle auto-redirect after 10 seconds (unobtrusive)
+    setTimeout(() => {
+      try { window.location.href = url; } catch(e) {}
+    }, 6000);
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
